@@ -1,0 +1,72 @@
+{
+	"name": "ds_reorder",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage_in",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "blob_input_data"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "reorder.csv",
+				"container": "vulnerability-assessment"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "PROD_ID",
+				"type": "String"
+			},
+			{
+				"name": "REORDER_ID",
+				"type": "String"
+			},
+			{
+				"name": "DATE_LOW",
+				"type": "String"
+			},
+			{
+				"name": "DATE_REORDERED",
+				"type": "String"
+			},
+			{
+				"name": "QUAN_LOW",
+				"type": "String"
+			},
+			{
+				"name": "QUAN_REORDERED",
+				"type": "String"
+			},
+			{
+				"name": "DATE_EXPECTED",
+				"type": "String"
+			},
+			{
+				"name": "ROW_INSERTED_DATE",
+				"type": "String"
+			},
+			{
+				"name": "ROW_UPDATED_DATE",
+				"type": "String"
+			},
+			{
+				"name": "ROW_INSERTED_BY",
+				"type": "String"
+			},
+			{
+				"name": "ROW_UPDATED_BY",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

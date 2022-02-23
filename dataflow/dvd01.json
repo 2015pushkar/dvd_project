@@ -1,0 +1,122 @@
+{
+	"name": "dvd01",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_customers",
+						"type": "DatasetReference"
+					},
+					"name": "customers"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_login_information",
+						"type": "DatasetReference"
+					},
+					"name": "LoginInformation"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_country",
+						"type": "DatasetReference"
+					},
+					"name": "Country"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_address",
+						"type": "DatasetReference"
+					},
+					"name": "Address"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_credit_card",
+						"type": "DatasetReference"
+					},
+					"name": "CreditCard"
+				},
+				{
+					"dataset": {
+						"referenceName": "sql_customers",
+						"type": "DatasetReference"
+					},
+					"name": "sinkdatefortype2customer"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "sql_customers",
+						"type": "DatasetReference"
+					},
+					"name": "InsertNewCol"
+				},
+				{
+					"dataset": {
+						"referenceName": "sql_customers",
+						"type": "DatasetReference"
+					},
+					"name": "UpdateSink"
+				}
+			],
+			"transformations": [
+				{
+					"name": "SelectLoginInfo"
+				},
+				{
+					"name": "CusLogininfo"
+				},
+				{
+					"name": "selectAddress"
+				},
+				{
+					"name": "selectCountry"
+				},
+				{
+					"name": "AddressCountryjoin"
+				},
+				{
+					"name": "CusLogAddCountry"
+				},
+				{
+					"name": "SelectCusLogAddCount"
+				},
+				{
+					"name": "Joincustomer"
+				},
+				{
+					"name": "CustomerSelectFinal"
+				},
+				{
+					"name": "SelectCredit"
+				},
+				{
+					"name": "csvDerivedaddCRISdEd"
+				},
+				{
+					"name": "Selectsinkcustomer"
+				},
+				{
+					"name": "LKPSourceSinkCus"
+				},
+				{
+					"name": "FilterExistsrows"
+				},
+				{
+					"name": "addEdCriZERO"
+				},
+				{
+					"name": "Selectonlykeepdestrows"
+				},
+				{
+					"name": "AlterRowUpdateif"
+				}
+			],
+			"script": "source(output(\n\t\tCUSTOMER_ID as integer,\n\t\tFIRST_NAME as string,\n\t\tLAST_NAME as string,\n\t\tREGION as integer,\n\t\tEMAIL as string,\n\t\tPHONE as string,\n\t\tDATE_OF_BIRTH as date 'yyyy-MM-dd',\n\t\tINCOME as integer,\n\t\tGENDER as string,\n\t\tROW_INSERTED_DATE as date 'yyyy-MM-dd',\n\t\tROW_UPDATED_DATE as date 'yyyy-MM-dd',\n\t\tROW_INSERTED_BY as integer,\n\t\tROW_UPDATED_BY as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> customers\nsource(output(\n\t\tCUSTOMER_ID as integer,\n\t\tUSER_NAME as string,\n\t\tPASSWORD as string,\n\t\tROW_INSERTED_DATE as string,\n\t\tROW_UPDATED_DATE as string,\n\t\tROW_INSERTED_BY as string,\n\t\tROW_UPDATED_BY as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> LoginInformation\nsource(output(\n\t\tCOUNTRY_CODE as integer,\n\t\tCOUNTRY_NAME as string,\n\t\tROW_INSERTED_DATE as string,\n\t\tROW_INSERTED_BY as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> Country\nsource(output(\n\t\tCUSTOMER_ID as integer,\n\t\tADDRESS1 as string,\n\t\tADDRESS2 as string,\n\t\tCITY as string,\n\t\tSTATE as string,\n\t\tCOUNTRY_CODE as integer,\n\t\tZIP as integer,\n\t\tROW_INSERTED_DATE as string,\n\t\tROW_UPDATED_DATE as string,\n\t\tROW_INSERTED_BY as string,\n\t\tROW_UPDATED_BY as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> Address\nsource(output(\n\t\tCUSTOMER_ID as integer,\n\t\tCREDIT_CARD_TYPE as integer,\n\t\tCREDIT_CARD_NUMBER as string,\n\t\tCREDIT_CARD_EXPIRATION as string,\n\t\tROW_INSERTED_DATE as string,\n\t\tROW_UPDATED_DATE as string,\n\t\tROW_INSERTED_BY as string,\n\t\tROW_UPDATED_BY as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> CreditCard\nsource(output(\n\t\tS_KEY as integer,\n\t\tCUSTOMER_ID as integer,\n\t\tFIRST_NAME as string,\n\t\tLAST_NAME as string,\n\t\tADDRESS1 as string,\n\t\tADDRESS2 as string,\n\t\tCITY as string,\n\t\tSTATE as string,\n\t\tZIP as integer,\n\t\tCOUNTRY as string,\n\t\tREGION as integer,\n\t\tEMAIL as string,\n\t\tPHONE as string,\n\t\tCREDIT_CARD_TYPE as integer,\n\t\tCREDIT_CARD_NUMBER as string,\n\t\tCREDIT_CARD_EXPIRATION as string,\n\t\tUSER_NAME as string,\n\t\tPASSWORD as string,\n\t\tDATE_OF_BIRTH as date,\n\t\tINCOME as integer,\n\t\tGENDER as string,\n\t\tROW_INSERTED_DATE as date,\n\t\tROW_UPDATED_DATE as date,\n\t\tROW_INSERTED_BY as integer,\n\t\tROW_UPDATED_BY as integer,\n\t\tSTART_DATE as date,\n\t\tEND_DATE as date,\n\t\tCURRENT_RECORD_INDICATOR as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> sinkdatefortype2customer\nLoginInformation select(mapColumn(\n\t\tCUSTOMER_ID,\n\t\tUSER_NAME,\n\t\tPASSWORD\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectLoginInfo\ncustomers, SelectLoginInfo join(customers@CUSTOMER_ID == SelectLoginInfo@CUSTOMER_ID,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> CusLogininfo\nAddress select(mapColumn(\n\t\tCUSTOMER_ID,\n\t\tADDRESS1,\n\t\tADDRESS2,\n\t\tCITY,\n\t\tSTATE,\n\t\tCOUNTRY_CODE,\n\t\tZIP\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> selectAddress\nCountry select(mapColumn(\n\t\tCOUNTRY_CODE,\n\t\tCOUNTRY_NAME\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> selectCountry\nselectAddress, selectCountry join(selectAddress@COUNTRY_CODE == selectCountry@COUNTRY_CODE,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> AddressCountryjoin\nCusLogininfo, AddressCountryjoin join(customers@CUSTOMER_ID == selectAddress@CUSTOMER_ID,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> CusLogAddCountry\nCusLogAddCountry select(mapColumn(\n\t\tCUSTOMER_ID = customers@CUSTOMER_ID,\n\t\tFIRST_NAME,\n\t\tLAST_NAME,\n\t\tREGION,\n\t\tEMAIL,\n\t\tPHONE,\n\t\tDATE_OF_BIRTH,\n\t\tINCOME,\n\t\tGENDER,\n\t\tROW_INSERTED_DATE,\n\t\tROW_UPDATED_DATE,\n\t\tROW_INSERTED_BY,\n\t\tROW_UPDATED_BY,\n\t\tCUSTOMER_ID = SelectLoginInfo@CUSTOMER_ID,\n\t\tUSER_NAME,\n\t\tPASSWORD,\n\t\tCUSTOMER_ID = selectAddress@CUSTOMER_ID,\n\t\tADDRESS1,\n\t\tADDRESS2,\n\t\tCITY,\n\t\tSTATE,\n\t\tCOUNTRY_CODE = selectAddress@COUNTRY_CODE,\n\t\tZIP,\n\t\tCOUNTRY_CODE = selectCountry@COUNTRY_CODE,\n\t\tCOUNTRY_NAME\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectCusLogAddCount\nSelectCusLogAddCount, SelectCredit join(SelectCusLogAddCount@CUSTOMER_ID == SelectCredit@CUSTOMER_ID,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> Joincustomer\nJoincustomer select(mapColumn(\n\t\tCUSTOMER_ID = SelectCusLogAddCount@CUSTOMER_ID,\n\t\tFIRST_NAME,\n\t\tLAST_NAME,\n\t\tADDRESS1,\n\t\tADDRESS2,\n\t\tCITY,\n\t\tSTATE,\n\t\tZIP,\n\t\tCOUNTRY_NAME,\n\t\tREGION,\n\t\tEMAIL,\n\t\tPHONE,\n\t\tCREDIT_CARD_TYPE,\n\t\tCREDIT_CARD_NUMBER,\n\t\tCREDIT_CARD_EXPIRATION,\n\t\tUSER_NAME,\n\t\tPASSWORD,\n\t\tDATE_OF_BIRTH,\n\t\tINCOME,\n\t\tGENDER,\n\t\tROW_INSERTED_DATE,\n\t\tROW_UPDATED_DATE,\n\t\tROW_INSERTED_BY,\n\t\tROW_UPDATED_BY\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> CustomerSelectFinal\nCreditCard select(mapColumn(\n\t\tCUSTOMER_ID,\n\t\tCREDIT_CARD_TYPE,\n\t\tCREDIT_CARD_NUMBER,\n\t\tCREDIT_CARD_EXPIRATION\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectCredit\nCustomerSelectFinal derive(START_DATE = ROW_UPDATED_DATE,\n\t\tEND_DATE = toDate('9999-12-31'),\n\t\tCURRENT_RECORD_INDICATOR = 1) ~> csvDerivedaddCRISdEd\nsinkdatefortype2customer select(mapColumn(\n\t\teach(match(true()),\n\t\t\t$$+'_scus' = $$)\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Selectsinkcustomer\ncsvDerivedaddCRISdEd, Selectsinkcustomer lookup(CUSTOMER_ID == CUSTOMER_ID_scus,\n\tmultiple: false,\n\tpickup: 'any',\n\tbroadcast: 'auto')~> LKPSourceSinkCus\nLKPSourceSinkCus filter(!isNull(CUSTOMER_ID_scus)) ~> FilterExistsrows\nFilterExistsrows derive(CURRENT_RECORD_INDICATOR_scus = 0,\n\t\tEND_DATE_scus = currentDate()) ~> addEdCriZERO\naddEdCriZERO select(mapColumn(\n\t\tS_KEY_scus,\n\t\tCUSTOMER_ID_scus,\n\t\tFIRST_NAME_scus,\n\t\tLAST_NAME_scus,\n\t\tADDRESS1_scus,\n\t\tADDRESS2_scus,\n\t\tCITY_scus,\n\t\tSTATE_scus,\n\t\tZIP_scus,\n\t\tCOUNTRY_scus,\n\t\tREGION_scus,\n\t\tEMAIL_scus,\n\t\tPHONE_scus,\n\t\tCREDIT_CARD_TYPE_scus,\n\t\tCREDIT_CARD_NUMBER_scus,\n\t\tCREDIT_CARD_EXPIRATION_scus,\n\t\tUSER_NAME_scus,\n\t\tPASSWORD_scus,\n\t\tDATE_OF_BIRTH_scus,\n\t\tINCOME_scus,\n\t\tGENDER_scus,\n\t\tROW_INSERTED_DATE_scus,\n\t\tROW_UPDATED_DATE_scus,\n\t\tROW_INSERTED_BY_scus,\n\t\tROW_UPDATED_BY_scus,\n\t\tSTART_DATE_scus,\n\t\tEND_DATE_scus,\n\t\tCURRENT_RECORD_INDICATOR_scus\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Selectonlykeepdestrows\nSelectonlykeepdestrows alterRow(updateIf(true())) ~> AlterRowUpdateif\ncsvDerivedaddCRISdEd sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tS_KEY as integer,\n\t\tCUSTOMER_ID as integer,\n\t\tFIRST_NAME as string,\n\t\tLAST_NAME as string,\n\t\tADDRESS1 as string,\n\t\tADDRESS2 as string,\n\t\tCITY as string,\n\t\tSTATE as string,\n\t\tZIP as integer,\n\t\tCOUNTRY as string,\n\t\tREGION as integer,\n\t\tEMAIL as string,\n\t\tPHONE as string,\n\t\tCREDIT_CARD_TYPE as integer,\n\t\tCREDIT_CARD_NUMBER as string,\n\t\tCREDIT_CARD_EXPIRATION as string,\n\t\tUSER_NAME as string,\n\t\tPASSWORD as string,\n\t\tDATE_OF_BIRTH as date,\n\t\tINCOME as integer,\n\t\tGENDER as string,\n\t\tROW_INSERTED_DATE as date,\n\t\tROW_UPDATED_DATE as date,\n\t\tROW_INSERTED_BY as integer,\n\t\tROW_UPDATED_BY as integer,\n\t\tSTART_DATE as date,\n\t\tEND_DATE as date,\n\t\tCURRENT_RECORD_INDICATOR as integer\n\t),\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 2,\n\terrorHandlingOption: 'stopOnFirstError',\n\tmapColumn(\n\t\tCUSTOMER_ID,\n\t\tFIRST_NAME,\n\t\tLAST_NAME,\n\t\tADDRESS1,\n\t\tADDRESS2,\n\t\tCITY,\n\t\tSTATE,\n\t\tZIP,\n\t\tCOUNTRY = COUNTRY_NAME,\n\t\tREGION,\n\t\tEMAIL,\n\t\tPHONE,\n\t\tCREDIT_CARD_TYPE,\n\t\tCREDIT_CARD_NUMBER,\n\t\tCREDIT_CARD_EXPIRATION,\n\t\tUSER_NAME,\n\t\tPASSWORD,\n\t\tDATE_OF_BIRTH,\n\t\tINCOME,\n\t\tGENDER,\n\t\tROW_INSERTED_DATE,\n\t\tROW_UPDATED_DATE,\n\t\tROW_INSERTED_BY,\n\t\tROW_UPDATED_BY,\n\t\tSTART_DATE,\n\t\tEND_DATE,\n\t\tCURRENT_RECORD_INDICATOR\n\t)) ~> InsertNewCol\nAlterRowUpdateif sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tS_KEY as integer,\n\t\tCUSTOMER_ID as integer,\n\t\tFIRST_NAME as string,\n\t\tLAST_NAME as string,\n\t\tADDRESS1 as string,\n\t\tADDRESS2 as string,\n\t\tCITY as string,\n\t\tSTATE as string,\n\t\tZIP as integer,\n\t\tCOUNTRY as string,\n\t\tREGION as integer,\n\t\tEMAIL as string,\n\t\tPHONE as string,\n\t\tCREDIT_CARD_TYPE as integer,\n\t\tCREDIT_CARD_NUMBER as string,\n\t\tCREDIT_CARD_EXPIRATION as string,\n\t\tUSER_NAME as string,\n\t\tPASSWORD as string,\n\t\tDATE_OF_BIRTH as date,\n\t\tINCOME as integer,\n\t\tGENDER as string,\n\t\tROW_INSERTED_DATE as date,\n\t\tROW_UPDATED_DATE as date,\n\t\tROW_INSERTED_BY as integer,\n\t\tROW_UPDATED_BY as integer,\n\t\tSTART_DATE as date,\n\t\tEND_DATE as date,\n\t\tCURRENT_RECORD_INDICATOR as integer\n\t),\n\tdeletable:false,\n\tinsertable:false,\n\tupdateable:true,\n\tupsertable:false,\n\tkeys:['S_KEY'],\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 1,\n\terrorHandlingOption: 'stopOnFirstError',\n\tmapColumn(\n\t\tS_KEY = S_KEY_scus,\n\t\tCUSTOMER_ID = CUSTOMER_ID_scus,\n\t\tFIRST_NAME = FIRST_NAME_scus,\n\t\tLAST_NAME = LAST_NAME_scus,\n\t\tADDRESS1 = ADDRESS1_scus,\n\t\tADDRESS2 = ADDRESS2_scus,\n\t\tCITY = CITY_scus,\n\t\tSTATE = STATE_scus,\n\t\tZIP = ZIP_scus,\n\t\tCOUNTRY = COUNTRY_scus,\n\t\tREGION = REGION_scus,\n\t\tEMAIL = EMAIL_scus,\n\t\tPHONE = PHONE_scus,\n\t\tCREDIT_CARD_TYPE = CREDIT_CARD_TYPE_scus,\n\t\tCREDIT_CARD_NUMBER = CREDIT_CARD_NUMBER_scus,\n\t\tCREDIT_CARD_EXPIRATION = CREDIT_CARD_EXPIRATION_scus,\n\t\tUSER_NAME = USER_NAME_scus,\n\t\tPASSWORD = PASSWORD_scus,\n\t\tDATE_OF_BIRTH = DATE_OF_BIRTH_scus,\n\t\tINCOME = INCOME_scus,\n\t\tGENDER = GENDER_scus,\n\t\tROW_INSERTED_DATE = ROW_INSERTED_DATE_scus,\n\t\tROW_UPDATED_DATE = ROW_UPDATED_DATE_scus,\n\t\tROW_INSERTED_BY = ROW_INSERTED_BY_scus,\n\t\tROW_UPDATED_BY = ROW_UPDATED_BY_scus,\n\t\tSTART_DATE = START_DATE_scus,\n\t\tEND_DATE = END_DATE_scus,\n\t\tCURRENT_RECORD_INDICATOR = CURRENT_RECORD_INDICATOR_scus\n\t)) ~> UpdateSink"
+		}
+	}
+}

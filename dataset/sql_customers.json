@@ -1,0 +1,142 @@
+{
+	"name": "sql_customers",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "sql_DB_SOURCE",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "sql_input"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "S_KEY",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CUSTOMER_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "FIRST_NAME",
+				"type": "varchar"
+			},
+			{
+				"name": "LAST_NAME",
+				"type": "varchar"
+			},
+			{
+				"name": "ADDRESS1",
+				"type": "varchar"
+			},
+			{
+				"name": "ADDRESS2",
+				"type": "varchar"
+			},
+			{
+				"name": "CITY",
+				"type": "varchar"
+			},
+			{
+				"name": "STATE",
+				"type": "varchar"
+			},
+			{
+				"name": "ZIP",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "COUNTRY",
+				"type": "varchar"
+			},
+			{
+				"name": "REGION",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "EMAIL",
+				"type": "varchar"
+			},
+			{
+				"name": "PHONE",
+				"type": "varchar"
+			},
+			{
+				"name": "CREDIT_CARD_TYPE",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "CREDIT_CARD_NUMBER",
+				"type": "varchar"
+			},
+			{
+				"name": "CREDIT_CARD_EXPIRATION",
+				"type": "varchar"
+			},
+			{
+				"name": "USER_NAME",
+				"type": "varchar"
+			},
+			{
+				"name": "PASSWORD",
+				"type": "varchar"
+			},
+			{
+				"name": "DATE_OF_BIRTH",
+				"type": "date"
+			},
+			{
+				"name": "INCOME",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "GENDER",
+				"type": "varchar"
+			},
+			{
+				"name": "ROW_INSERTED_DATE",
+				"type": "date"
+			},
+			{
+				"name": "ROW_UPDATED_DATE",
+				"type": "date"
+			},
+			{
+				"name": "ROW_INSERTED_BY",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ROW_UPDATED_BY",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "START_DATE",
+				"type": "date"
+			},
+			{
+				"name": "END_DATE",
+				"type": "date"
+			},
+			{
+				"name": "CURRENT_RECORD_INDICATOR",
+				"type": "smallint",
+				"precision": 5
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "dim"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

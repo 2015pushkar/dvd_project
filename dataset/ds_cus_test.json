@@ -1,0 +1,124 @@
+{
+	"name": "ds_cus_test",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_cus_test_in",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "fol_test"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "scdtype2customer.csv",
+				"container": "inputfortest"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "CUSTOMER_ID",
+				"type": "String"
+			},
+			{
+				"name": "FIRST_NAME",
+				"type": "String"
+			},
+			{
+				"name": "LAST_NAME",
+				"type": "String"
+			},
+			{
+				"name": "ADDRESS1",
+				"type": "String"
+			},
+			{
+				"name": "ADDRESS2",
+				"type": "String"
+			},
+			{
+				"name": "CITY",
+				"type": "String"
+			},
+			{
+				"name": "STATE",
+				"type": "String"
+			},
+			{
+				"name": "ZIP",
+				"type": "String"
+			},
+			{
+				"name": "COUNTRY_NAME",
+				"type": "String"
+			},
+			{
+				"name": "REGION",
+				"type": "String"
+			},
+			{
+				"name": "EMAIL",
+				"type": "String"
+			},
+			{
+				"name": "PHONE",
+				"type": "String"
+			},
+			{
+				"name": "CREDIT_CARD_TYPE",
+				"type": "String"
+			},
+			{
+				"name": "CREDIT_CARD_NUMBER",
+				"type": "String"
+			},
+			{
+				"name": "CREDIT_CARD_EXPIRATION",
+				"type": "String"
+			},
+			{
+				"name": "USER_NAME",
+				"type": "String"
+			},
+			{
+				"name": "PASSWORD",
+				"type": "String"
+			},
+			{
+				"name": "DATE_OF_BIRTH",
+				"type": "String"
+			},
+			{
+				"name": "INCOME",
+				"type": "String"
+			},
+			{
+				"name": "GENDER",
+				"type": "String"
+			},
+			{
+				"name": "ROW_INSERTED_DATE",
+				"type": "String"
+			},
+			{
+				"name": "ROW_UPDATED_DATE",
+				"type": "String"
+			},
+			{
+				"name": "ROW_INSERTED_BY",
+				"type": "String"
+			},
+			{
+				"name": "ROW_UPDATED_BY",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

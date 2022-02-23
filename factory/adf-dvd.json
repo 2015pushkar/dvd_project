@@ -1,0 +1,9 @@
+{
+	"name": "adf-dvd",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "b4da9257-16cf-4ff8-807f-980fc88d8176",
+		"tenantId": "cce6e522-e8a8-4186-ba78-b143bca2b443"
+	}
+}

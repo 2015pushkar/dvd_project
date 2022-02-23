@@ -1,0 +1,60 @@
+{
+	"name": "ds_credit_card",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage_in",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "blob_input_data"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "credit_card.csv",
+				"container": "vulnerability-assessment"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "CUSTOMER_ID",
+				"type": "String"
+			},
+			{
+				"name": "CREDIT_CARD_TYPE",
+				"type": "String"
+			},
+			{
+				"name": "CREDIT_CARD_NUMBER",
+				"type": "String"
+			},
+			{
+				"name": "CREDIT_CARD_EXPIRATION",
+				"type": "String"
+			},
+			{
+				"name": "ROW_INSERTED_DATE",
+				"type": "String"
+			},
+			{
+				"name": "ROW_UPDATED_DATE",
+				"type": "String"
+			},
+			{
+				"name": "ROW_INSERTED_BY",
+				"type": "String"
+			},
+			{
+				"name": "ROW_UPDATED_BY",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

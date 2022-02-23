@@ -1,0 +1,36 @@
+{
+	"name": "pipelinewithSDeqCD",
+	"properties": {
+		"activities": [
+			{
+				"name": "Data flow1",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "1.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "df_cus_test_copy1",
+						"type": "DataFlowReference",
+						"parameters": {
+							"PRIMARY_KEY": "CUSTOMER_ID",
+							"COLUMNS": "'FIRST_NAME,LAST_NAME,ADDRESS1,ADDRESS2,CITY,STATE,EMAIL,CREDIT_CARD_EXPIRATION,USER_NAME,PASSWORD,GENDER'"
+						}
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"annotations": []
+	}
+}
